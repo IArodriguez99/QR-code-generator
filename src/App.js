@@ -1,16 +1,15 @@
 import './App.css';
-import React, {useState} from 'react'
-import QRCode from 'qrcode'
-
-
-
+import React, {useState, useRef} from 'react';
+import QRCode from 'qrcode';
+import QrReader from 'react-qr-reader';
 
 
 function App() {
 
   const [text, setText] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-
+  const [scanResultFile, setScanResultFile] = useState('');
+  const qrRef = useRef(null);
 
   const generateQrCode = async () => {
     try {
@@ -19,6 +18,18 @@ function App() {
     }catch (error) {
       console.log(error);
     }
+  }
+
+  const handleErrorFile = (error) => {
+    console.log(error);
+  }
+  const handleScanFile = (result) => {
+      if (result) {
+          setScanResultFile(result);
+      }
+  }
+  const onScanFile = () => {
+    qrRef.current.openImageDialog();
   }
 
   
@@ -42,14 +53,24 @@ function App() {
                   <img src={imageUrl} alt="img"/>
                 </a>) : null}
             </div>
-            
+
           </div>
           
-          <div class="grid row-span-6 justify-items-center items-start max-w-fit">
-              <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 my-10 rounded" type="button">
+          <div class="grid row-span-6 justify-items-center items-start">
+              <button class=" bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 my-10 rounded" type="button" onClick={onScanFile}> 
                 Scan QR Code
               </button>
-            
+              
+              <QrReader
+                ref={qrRef}
+                delay={300}
+                style={{ width: '100%' }}
+                onError={handleErrorFile}
+                onScan={handleScanFile}
+                legacyMode
+                />
+              <h3>Scanned Code: {scanResultFile}</h3>
+             
           </div>
           
           <div class="grid row-span-6 place-items-center">04</div>
