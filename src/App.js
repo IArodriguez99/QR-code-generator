@@ -1,7 +1,8 @@
 import './App.css';
 import React, {useState, useRef} from 'react';
-import QRCode from 'qrcode';
 import QrReader from 'react-qr-reader';
+import QRCode from 'qrcode';
+
 
 
 function App() {
