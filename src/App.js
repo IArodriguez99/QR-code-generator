@@ -20,7 +20,6 @@ function App() {
       console.log(error);
     }
   }
-
   const handleErrorFile = (error) => {
     console.log(error);
   }
@@ -32,11 +31,13 @@ function App() {
   const onScanFile = () => {
     qrRef.current.openImageDialog();
   }
+  
+
 
   
   return (
     <div className="App">
-      <div class="container grid grid-col-3 grid-flow-row min-h-screen">
+      <div class="container grid grid-col-3 grid-flow-row min-h-screen min-w-80 justify-items-stretch">
           
           <div class="grid col-span-3 place-items-center">Generate and scan QR codes</div>
 
@@ -74,7 +75,16 @@ function App() {
              
           </div>
           
-          <div class="grid row-span-6 place-items-center">04</div>
+          <div class="grid row-span-6 place-items-center">
+            <h3>Qr Code Scan by Web Cam</h3>
+            <QrReader
+              delay={300}
+              style={{width: '100%'}}
+              onError={}
+              onScan={}
+              />
+            <h3>Scanned By WebCam Code: {}</h3>    
+          </div>
       </div>
     </div>
   );
