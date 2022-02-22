@@ -10,6 +10,7 @@ function App() {
   const [text, setText] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [scanResultFile, setScanResultFile] = useState('');
+  const [scanResultWebCam, setScanResultWebCam] =  useState('');
   const qrRef = useRef(null);
 
   const generateQrCode = async () => {
@@ -31,10 +32,15 @@ function App() {
   const onScanFile = () => {
     qrRef.current.openImageDialog();
   }
-  
+  const handleErrorWebCam = (error) => {
+    console.log(error);
+  }
+  const handleScanWebCam = (result) => {
+    if (result){
+        setScanResultWebCam(result);
+    }
+   }
 
-
-  
   return (
     <div className="App">
       <div class="container grid grid-col-3 grid-flow-row min-h-screen min-w-80 justify-items-stretch">
@@ -79,11 +85,11 @@ function App() {
             <h3>Qr Code Scan by Web Cam</h3>
             <QrReader
               delay={300}
-              style={{width: '100%'}}
-              onError={}
-              onScan={}
+              style={{width: '80%'}}
+              onError={handleErrorWebCam}
+              onScan={handleScanWebCam}
               />
-            <h3>Scanned By WebCam Code: {}</h3>    
+            <h3>Scanned By WebCam Code: {setScanResultWebCam}</h3>    
           </div>
       </div>
     </div>
