@@ -4,7 +4,6 @@ import QrReader from 'react-qr-reader';
 import QRCode from 'qrcode';
 
 
-
 function App() {
 
   const [text, setText] = useState('');
@@ -43,14 +42,14 @@ function App() {
 
   return (
     <div className="App">
-      <div class="container grid grid-col-3 grid-flow-row min-h-screen min-w-80 justify-items-stretch">
+      <div class="container grid grid-cols-3 min-h-screen items-start min-w-[100%]">
           
-          <div class="grid col-span-3 place-items-center">Generate and scan QR codes</div>
+          <h1 class="grid col-span-3 place-items-center self-center text-2xl font-mono">Generate and scan QR codes</h1>
 
-          <div class="grid row-span-5 justify-items-center items-start">
+          <div class="grid justify-items-center place-items-start">
             <div class="flex items-center border-b border-teal-500 py-2 my-8">
             <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Enter a URL" aria-label="Full name" onChange={(e) => setText(e.target.value)}/>
-              <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button" onClick={() => generateQrCode()}>
+              <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded font-mono" type="button" onClick={() => generateQrCode()}>
                 Generate
               </button>
             </div>
@@ -64,32 +63,32 @@ function App() {
 
           </div>
           
-          <div class="grid row-span-6 justify-items-center items-start">
-              <button class=" bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 my-10 rounded" type="button" onClick={onScanFile}> 
+          <div class="grid justify-items-center items-start">
+              <button class="bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 my-10 rounded font-mono" type="button" onClick={onScanFile}> 
                 Scan QR Code
               </button>
               
               <QrReader
                 ref={qrRef}
                 delay={300}
-                style={{ width: '100%' }}
+                style={{ width: '50%' }}
                 onError={handleErrorFile}
                 onScan={handleScanFile}
                 legacyMode
                 />
-              <h3>Scanned Code: {scanResultFile}</h3>
+              <h3 class="font-mono">Scanned Code: {scanResultFile}</h3>
              
           </div>
           
-          <div class="grid row-span-6 place-items-center">
-            <h3>Qr Code Scan by Web Cam</h3>
+          <div class="grid justify-items-center items-start">
+            <h3 class="py-1 px-2 my-10 font-mono">Qr Code Scan by Web Cam</h3>
             <QrReader
               delay={300}
-              style={{width: '80%'}}
+              style={{width: '50%'}}
               onError={handleErrorWebCam}
               onScan={handleScanWebCam}
               />
-            <h3>Scanned By WebCam Code: {setScanResultWebCam}</h3>    
+            <h3 class="font-mono">Scanned By WebCam Code: {scanResultWebCam}</h3>    
           </div>
       </div>
     </div>
